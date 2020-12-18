@@ -47,7 +47,7 @@
     <div v-for = "(student, index) in students" :key="index">
       {{ student }} {{index}}
     </div>-->
-    <!--
+    
     <div class="list">
       <div v-for="(language, index) in languages" @click="language.selected = !language.selected" :key="index" :class="{selected: language.selected}">
       {{language.name}}
@@ -63,7 +63,7 @@
       <div v-for="(selectedLanguage, index) in selectedLanguages" @click="selectedLanguage.selected = !selectedLanguage.selected" :key="index" :class="{selected: selectedLanguage.selected}">
       {{selectedLanguage.name}}
     </div>
-    </div>-->
+    </div>
     <Menu/>
     <Article
       v-for="(article, index) in articles"
