@@ -64,17 +64,25 @@
       {{selectedLanguage.name}}
     </div>
     </div>-->
+    <!-- Ngay 17/12/2020-->
     <Menu/>
     <Article
       v-for="(article, index) in articles"
       :key="index"
       :article="article"
     />
-    <input type="text" v-model="name" ref="name">
-    {{name}}
+    <input type="text" v-model="person.name" ref="name">
     <ul>
-      
+      <li><a href="#" @click.prevent="page = 1">1</a></li>
+      <li><a href="#" @click.prevent="page = 2">2</a></li>
+      <li><a href="#" @click.prevent="page = 3">3</a></li>
     </ul>
+    <div v-for="(product, index) in products" :key="index">
+      <h3>{{ product.name }}</h3>
+      <div>{{ product.price | formatMoney }}</div>
+    </div>
+    <hr>
+    <div>{{ products.reduce((total, product) => total + product.price, 0) | formatMoney }}</div>
   </div>
 </template>
 
@@ -96,13 +104,13 @@ export default {
       newStudent: '',
       students: ['a', 'b', 'c']
       */
+     //ngay 17/12/2020 
       languages: [
         {name: 'html', selected: false},
         {name: 'css', selected: false},
         {name: 'js', selected: false},
         {name: 'python', selected: false},
-        {name: 'C', selected: false},
-        
+        {name: 'C', selected: false}
       ],
       selectedLanguages: [
         {name: 'nodejs', selected: false}
@@ -113,25 +121,43 @@ export default {
         {title: 'bai viet 3', content: 'noi dung 3'},
         {title: 'bai viet 4', content: 'noi dung 4'},
       ],
-      name: ''
+      person: {
+        name: ''
+      },
+      page: 1,
+      products: [
+        {name: 'iphone', price: 1000000},
+        {name: 'iphonex', price: 11000000}
+      ]
     }
   },
   mounted() {
     this.$refs.name.focus()
   },
   watch: {
-    name: function() {
-      console.log('changed')
+    page: function() {
+      this.loadData();
+    },
+    person: {
+    handler: function(newvValue, oldValue) {
+      console.log(newvValue, oldValue);
+      },
+      deep: true
     }
   },
   methods: {
     loadData: function() {
-      
+      console.log('load data');
     }
   },
   components: {
     Menu,
     Article
+  },
+  filters: {
+    formatMoney: function(money) {
+      return Number((money).toFixed(1)).toLocaleString()
+    }
   }
 }
 </script>
