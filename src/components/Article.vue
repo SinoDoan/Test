@@ -6,7 +6,12 @@
 </template>
 <script>
 export default {
-    props: ['article']
+    props: ['article'],
+    data() {
+        return {
+            
+        }
+    } 
 }
 </script>
 <style lang="stylus" scoped>
